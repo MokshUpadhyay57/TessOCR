@@ -5,7 +5,7 @@ import time
 
 Segmentation_modes = {"Automatic": 3, "Single Column": 4, "Uniform Block of Text": 6}
 Languages = {"English": "eng", "Hindi": "hin", "Assamese": "asm", "Bengali": "ben"}
-Engine_mode = {"LSTM": 1, "Legacy+LSTM": 3}
+Engine_mode = {"LSTM": 1, "Legacy + LSTM": 3}
 
 
 def file_upload():
@@ -36,10 +36,6 @@ def detect_script(img):
     return script, r
 
 
-def download_ocr_text(ocr_text):
-    st.write('<a href="download_ocr_text.py" target="_blank">Download OCR Text</a>')
-
-
 st.set_page_config(layout="wide", page_title="OCR Using Tesseract OCR")
 col1, col2, col3 = st.columns([0.7, 0.6, 0.8])
 selected_lang = col1.selectbox(label="Language", options=Languages.keys())
@@ -65,7 +61,6 @@ with column2:
             if "ocr_text" not in st.session_state:
                 st.session_state.ocr_text = text
 
-
 with column2:
     if c2.button("Detect Script", use_container_width=True):
         with st.spinner('Detecting script...'):
@@ -73,4 +68,3 @@ with column2:
             time.sleep(2)  # Simulate processing time
             column2.write("The detected script in the image is " + script)
             column2.write(f"The detected rotation in the image is {rotation} degree")
-
