@@ -21,13 +21,14 @@ def file_upload(uploaded_file):
         file_extension = uploaded_file.name.split('.')[1].lower()
         if file_extension == "pdf":
             pdf_pages = convert_pdf_to_images(uploaded_file)
-            st.session_state.pdf_images = pdf_pages
             st.success(f"PDF with {len(pdf_pages)} page(s) uploaded successfully.")
+            st.session_state.pdf_images = pdf_pages
             for i, page_img in enumerate(pdf_pages):
                 column1.image(page_img, caption=f"Page {i+1} of Uploaded PDF", use_container_width=True)
             return pdf_pages
         elif file_extension in ["jpg", "jpeg", "png"]:
             img = Image.open(uploaded_file)
+            st.success(f"Image uploaded successfully.")
             st.session_state.uploaded_image = img
             column1.image(img, caption="Uploaded Image")
             return img
@@ -100,12 +101,12 @@ with column2:
                         all_text += f"Page {i}:\n{text}\n\n"
                     st.session_state.ocr_text = all_text
                     time.sleep(5)
-                    column2.text_area("", all_text, height=300)
+                    column2.text_area("", all_text, height=1000, label_visibility="hidden")
                 else:
                     text = ocr_image(image, Languages[selected_lang], Engine_mode[selected_engine], Segmentation_modes[selected_segmentation])
                     st.session_state.ocr_text = text
                     time.sleep(2)
-                    column2.text_area("", text, height=300)
+                    column2.text_area("", text, height=1000, label_visibility="hidden")
 
                 
 
@@ -123,9 +124,12 @@ with column2:
                             f"Page {i}: \n"
                             f"The script in the image is {script}\n"
                             f"The rotation in the image is {rotation} degrees\n\n",
-                            height=150
+                            height=300,
+                            label_visibility="hidden"
                         )  
                 else :
                     script, rotation = detect_script(image)
                     time.sleep(2)  # Simulate processing time
-                    column2.text_area("", "The script in the image is " + script + "\n" + "The rotation in the image is {rotation} degree", height=300)
+                    column2.text_area("", "The script in the image is " + script + "\n" 
+                                      + "The rotation in the image is {rotation} degree", 
+                                      height=300,  label_visibility="hidden")
