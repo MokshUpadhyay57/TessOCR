@@ -53,7 +53,7 @@ def convert_pdf_to_images(pdf_file):
 
 
 def ocr_image(img, lang, engine_mode, segmentation_modes):
-    tess_dir = r"F:/Internship/STREAMLIT/Tesseract_Training/tesseract/tessdata"
+    tess_dir = r"F:/Internship/STREAMLIT/tesseract/tessdata/"
     config = f'--tessdata-dir {tess_dir} --psm {segmentation_modes} --oem {engine_mode}'
     txt = pytesseract.image_to_string(img, config=config, lang=lang)
     return txt
@@ -61,7 +61,7 @@ def ocr_image(img, lang, engine_mode, segmentation_modes):
 
 def detect_script(img):
     """ function to detect script """
-    tess_dir = r"F:/Internship/STREAMLIT/Tesseract_Training/tesseract/tessdata"
+    tess_dir = r"F:/Internship/STREAMLIT/tesseract/tessdata/"
     config = f'--tessdata-dir {tess_dir} --psm 0'
     osd = pytesseract.image_to_osd(img, config=config)
     for line in osd.splitlines():
@@ -94,20 +94,17 @@ with column2:
             if uploaded_file is None:  # Error handling if no file uploaded
                 st.write("Please upload a file before clicking 'Recognize Text'")
             else :
-                if 'ocr_text' not in st.session_state: 
-                    if uploaded_file.type == "application/pdf":
-                        all_text = ""
-                        for i, image in enumerate (st.session_state.pdf_images,1):
-                            text = ocr_image(image, Languages[selected_lang], Engine_mode[selected_engine], Segmentation_modes[selected_segmentation])
-                            all_text += f"Page {i}:\n{text}\n\n"
-                        st.session_state.ocr_text = all_text
-                        column2.text_area("", all_text, height=300)
-                    else:
+                if uploaded_file.type == "application/pdf":
+                    all_text = ""
+                    for i, image in enumerate (st.session_state.pdf_images,1):
                         text = ocr_image(image, Languages[selected_lang], Engine_mode[selected_engine], Segmentation_modes[selected_segmentation])
-                        st.session_state.ocr_text = text
-                        column2.text_area("", text, height=300)
+                        all_text += f"Page {i}:\n{text}\n\n"
+                    st.session_state.ocr_text = all_text
+                    column2.text_area("", all_text, height=300)
                 else:
-                    st.text_area("", st.session_state.ocr_text, height=300)
+                    text = ocr_image(image, Languages[selected_lang], Engine_mode[selected_engine], Segmentation_modes[selected_segmentation])
+                    st.session_state.ocr_text = text
+                    column2.text_area("", text, height=300)
                 
 
 with column2:
