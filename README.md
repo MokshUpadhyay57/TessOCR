@@ -1,10 +1,15 @@
 # Welcome to TessOCR 👋
 [![Twitter: UpadhyayMoksh](https://img.shields.io/twitter/follow/UpadhyayMoksh.svg?style=social)](https://twitter.com/UpadhyayMoksh)
 
-> A Simple Web App for text extraction from images and pdfs.
+A Simple Web App for text extraction from images and pdfs.
 
 ### 🏠 [Homepage](1_Home.py)
 
+## Install Streamlit
+
+```sh 
+pip install streamlit
+```
 ## Usage
 
 ```sh
