@@ -1,6 +1,6 @@
 # Welcome to TessOCR 👋
 
-web application for text extraction from pdfs and images
+Web application for text extraction from pdfs and images.
 
 ### 🏠 [Homepage](1_Home.py)
 
