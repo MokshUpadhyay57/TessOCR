@@ -100,11 +100,14 @@ with column2:
                         text = ocr_image(image, Languages[selected_lang], Engine_mode[selected_engine], Segmentation_modes[selected_segmentation])
                         all_text += f"Page {i}:\n{text}\n\n"
                     st.session_state.ocr_text = all_text
+                    time.sleep(5)
                     column2.text_area("", all_text, height=300)
                 else:
                     text = ocr_image(image, Languages[selected_lang], Engine_mode[selected_engine], Segmentation_modes[selected_segmentation])
                     st.session_state.ocr_text = text
+                    time.sleep(2)
                     column2.text_area("", text, height=300)
+
                 
 
 with column2:
