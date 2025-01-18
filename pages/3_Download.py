@@ -4,7 +4,7 @@ import streamlit as st
 
 def main():
     global file_name
-    st.set_page_config(layout="wide", page_title="Download OCR Text")
+    st.set_page_config(layout="wide", page_title="TessOCR: Download your OCR Text", page_icon=":computer:")
     col1, col2 = st.columns([0.4, 0.5], gap="medium")
     download_format = col1.selectbox(label="Select a Option", options=["Plain Text (TXT)", "PDF", "Word Document (DOCX)"])
 

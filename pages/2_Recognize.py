@@ -73,7 +73,7 @@ def detect_script(img):
     return script, rotation
 
 
-st.set_page_config(layout="wide", page_title="OCR Using Tesseract OCR")
+st.set_page_config(layout="wide", page_title="TessOCR: Extract your text", page_icon=":computer:")
 
 col1, col2, col3 = st.columns([0.7, 0.6, 0.8])
 selected_lang = col1.selectbox(label="Language", options=Languages.keys())
