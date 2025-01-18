@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def main():
-    st.set_page_config(layout="wide", page_title="OCR Using Tesseract OCR")
+    st.set_page_config(layout="wide", page_title="TessOCR: OCR Using Tesseract OCR", page_icon=":computer:")
     st.title("Welcome to TessOCR")
 
     # Introduction
@@ -13,7 +13,7 @@ def main():
     """)
 
     # Visual Elements
-    st.image("images/tess_ocr.png", use_column_width=True)
+    st.image("images/tess_ocr.png", use_container_width=True)
 
     # Key Features
     st.header("Key Features")
@@ -35,9 +35,12 @@ def main():
         5. **Download Text:** Optionally download the extracted text as a text file.
     """)
 
+    st.write("\n\n")
+
     # Button to navigate to another page
-    if st.button("Go to Upload Page"):
+    if st.button("Start Your OCR Journey - Upload Your File Now!", use_container_width=True, type="primary"):
         st.switch_page("pages/2_Recognize.py")
+        st.session_state.page = "Upload"
 
 
 main()

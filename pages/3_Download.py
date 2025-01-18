@@ -18,7 +18,6 @@ def main():
         custom_file_name = col2.text_input("Enter custom file name:")
 
         # Determine file name and MIME type based on selected format
-        # Determine file name and MIME type based on selected format
         if download_format == "Plain Text (TXT)":
             file_extension = ".txt"
             mime_type = "text/plain"
