@@ -19,7 +19,6 @@ def file_upload(uploaded_file):
     """file upload and displays uploaded images."""
     if uploaded_file is not None:
         file_extension = uploaded_file.name.split('.')[1].lower()
-        print(file_extension)
         if file_extension == "pdf":
             pdf_pages = convert_pdf_to_images(uploaded_file)
             st.session_state.pdf_images = pdf_pages
@@ -116,6 +115,17 @@ with column2:
                 st.write("Please upload a file before clicking 'Detect Text'")
         else:
             with st.spinner('Detecting script...'):
-                script, rotation = detect_script(image)
-                time.sleep(2)  # Simulate processing time
-                column2.text_area("The script in the image is " + script + "\n" + "The rotation in the image is {rotation} degree", height=300)
+                if uploaded_file.type == "application/pdf":
+                    for i, image in enumerate (st.session_state.pdf_images,1):
+                        script, rotation = detect_script(image)
+                        column2.text_area(
+                            "",
+                            f"Page {i}: \n"
+                            f"The script in the image is {script}\n"
+                            f"The rotation in the image is {rotation} degrees\n\n",
+                            height=150
+                        )  
+                else :
+                    script, rotation = detect_script(image)
+                    time.sleep(2)  # Simulate processing time
+                    column2.text_area("", "The script in the image is " + script + "\n" + "The rotation in the image is {rotation} degree", height=300)
